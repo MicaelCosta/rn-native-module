@@ -7,12 +7,23 @@ export default function App() {
   //Como a exportação foi utilizando o NSObject, é possivel desestruturar o retorno
   const { ExampleModule } = NativeModules;
 
-  console.log(ExampleModule)
+  console.log(ExampleModule);
+
+  function printMessage(){
+    ExampleModule.printMessage("My title", 17)
+  }
+
+  function returnMessage(){
+    ExampleModule.returnMessage("João")
+    .then(result => console.log(`Message from native module: ${result}`))
+    .catch(error => console.error(error));
+  }
 
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <Button title='Print message' onPress={() => ExampleModule.printMessage("My title", 17)} />
+      <Button title='Print message' onPress={printMessage} />
+      <Button title='Return message' onPress={returnMessage} />
     </View>
   );
 }

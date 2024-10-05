@@ -16,6 +16,8 @@
 //o "*" diz que qualquer coisa que vier será destinado para esse parametro
 RCT_EXTERN_METHOD(printMessage: (NSString *) title: (CGFloat *) value)
 
+RCT_EXTERN_METHOD(returnMessage: (NSString *) title resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+
 
 //Finaliza o arquivo
 @end
