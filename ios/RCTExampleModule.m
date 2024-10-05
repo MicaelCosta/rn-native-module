@@ -18,6 +18,7 @@ RCT_EXTERN_METHOD(printMessage: (NSString *) title: (CGFloat *) value)
 
 RCT_EXTERN_METHOD(returnMessage: (NSString *) title resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(eventMessage: (CGFloat *) value)
 
 //Finaliza o arquivo
 @end

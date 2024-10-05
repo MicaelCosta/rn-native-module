@@ -19,7 +19,11 @@ import React
 @objc(RCTExampleModule)
 
 //Herda do NSObject porque no arquivo do Objective-C foi exportado como NSObject
-class RCTExampleModule: NSObject {
+//class RCTExampleModule: NSObject {
+ 
+//Como agora existe o recurso de event listener send usado
+//a tipagem dessa classe muda para RCTEventEmitter
+class RCTExampleModule: RCTEventEmitter {
   
   //A tipagem do parametro é essencial
   //o React acaba se perdendo na comunicação com os parametros
@@ -43,5 +47,17 @@ class RCTExampleModule: NSObject {
       let error = NSError(domain: "", code: 200, userInfo: [NSLocalizedDescriptionKey: "Title error"])
       reject("Error", "Message error: \(title)", error)
     }
+  }
+  
+  //Event listener usado quando precisa executar um processamento maior
+  //Para nao travar o usuário, envia o evento e fica "escutando" um retorno
+  @objc
+  func eventMessage(_ value: CGFloat){
+    sendEvent(withName: "onMessagePrinted", body: ["value": value])
+  }
+  
+  //Diz quais sao os eventos suportados
+  override func supportedEvents() -> [String]! {
+    return ["onMessagePrinted"]
   }
 }
