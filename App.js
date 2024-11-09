@@ -1,5 +1,12 @@
-import React from 'react';
-import { StyleSheet, Text, View, NativeModules, Button, NativeEventEmitter } from 'react-native';
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  NativeModules,
+  Button,
+  NativeEventEmitter,
+} from "react-native";
 
 export default function App() {
   //Do lado nativo o nome é RCTExampleModule
@@ -12,34 +19,34 @@ export default function App() {
   //Registra o evento para utilizar a funçao eventMessage
   const eventEmitter = new NativeEventEmitter(ExampleModule);
   const subscription = eventEmitter.addListener("onMessagePrinted", (event) => {
-    console.log("Evento recebido: ", event)
+    console.log("Evento recebido: ", event);
   });
 
-  function printMessage(){
-    ExampleModule.printMessage("My title", 17)
+  function printMessage() {
+    ExampleModule.printMessage("My title", 17);
   }
 
-  function returnMessage(){
+  function returnMessage() {
     ExampleModule.returnMessage("João")
-    .then(result => console.log(`Message from native module: ${result}`))
-    .catch(error => console.error(error));
+      .then((result) => console.log(`Message from native module: ${result}`))
+      .catch((error) => console.error(error));
   }
 
-  function eventMessage(){
+  function eventMessage() {
     ExampleModule.eventMessage(10);
   }
 
-  function killEvent(){
+  function killEvent() {
     subscription.remove();
   }
 
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <Button title='Print message' onPress={printMessage} />
-      <Button title='Return message' onPress={returnMessage} />
-      <Button title='Event message' onPress={eventMessage} />
-      <Button title='Kill event' onPress={killEvent} />
+      <Button title="Print message" onPress={printMessage} />
+      <Button title="Return message" onPress={returnMessage} />
+      <Button title="Event message" onPress={eventMessage} />
+      <Button title="Kill event" onPress={killEvent} />
     </View>
   );
 }
@@ -47,8 +54,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
